@@ -22,8 +22,11 @@ Por favor, escribe en impersonal las respuestas.
 Abstracción,  Encapsulación, Herencia  y Polimorfismo. 
 
 -Abstracción intenta olvidar detalles para: a) Tratar con temas complejos y b) Para facilitar el cambio.
+
 -Encapsulación: a) Unir estado y comportamiento y b) Ocultar partes.
+
 -Herencia: Establecer jerarquías.
+
 -Polimorfismo: Misma función, distintas formas (o implementaciones).
 
 ## 2. Cita cuatro lenguajes populares que permitan la programación orientada a objetos
@@ -46,7 +49,9 @@ La programación estructurada consiste en estructuras de control condicional (if
 Identidad, Estado y Comportamiento.
 
 -Identidad: dirección de memoria.
+
 -Estado: atributos ( lo que en los struts eran campos).
+
 -Comportamiento: métodos (son las funciones que todos los objetos de esa clase puedan hacer).
 
 
@@ -54,7 +59,8 @@ Identidad, Estado y Comportamiento.
 
 ### Respuesta
 
--Clase: Molde para crear instancias durante la ejecución. Define la estructura del estado y el comportamiento. 
+-Clase: Molde para crear instancias durante la ejecución. Define la estructura del estado y el comportamiento.
+
 -Objeto: Variables de tipo alguna clase con un estado concreto de sus atributos.
 
 
@@ -72,6 +78,31 @@ Identidad, Estado y Comportamiento.
 
 ### Respuesta
 
+```
+class Punto {
+    //Estado, es decir, atributos
+	int x;
+	int y;
+
+	//Comportamiento, es decir, métodos...
+	double calcularDistanciaAOrigen() {
+		return sqrt(x*x + y*y);
+	}
+
+}
+
+
+public class Ejercicio1 {
+	public static void main (String args []) {
+		Punto mipunto = new Punto();
+		mipunto.x = 5;
+		mipunto.y = 6;
+
+		double aOrigen = mipunto.calcularDistanciaAOrigen(mipunto);		
+	}
+}
+
+```
 
 ## 9. ¿Cuál es el punto de entrada en un programa en Java? ¿Qué es `static` y para qué vale? ¿Sólo se emplea para ese método `main`? ¿Para qué se combina con `final`?
 
