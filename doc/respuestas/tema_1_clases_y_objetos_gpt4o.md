@@ -86,7 +86,7 @@ class Punto {
 
 	//Comportamiento, es decir, métodos...
 	double calcularDistanciaAOrigen() {
-		return sqrt(x*x + y*y);
+		return Math.sqrt(x*x + y*y);
 	}
 
 }
