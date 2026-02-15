@@ -219,33 +219,57 @@ Es un tipo con un conjunto fijo y limitado de constantes con nombre. En Java, un
 
 ### Respuesta
 
+En Java, un `enum` es una clase especial. Los constructores de los enums son siempre privados (se ejecutan automáticamente al crear las constantes) y el método `ordinal()` ya viene de serie (empezando en 0, por eso le sumamos 1).
+
 ```java
 public enum Mes {
     ENERO(31), FEBRERO(28), MARZO(31), ABRIL(30), MAYO(31), JUNIO(30),
-    JULIO(31), AGOSTO(31), SEPTIEMBRE(30), OCTUBRE(31), NOVIEMBRE(30), DICIEMBRE(31);
+    JULIO(31), AGOSTO(31), SEPTIEMBRE(30), OCTUBRE(31), NOVIEMBRE(30), 
+    DICIEMBRE(31);
 
-    private final int dias;
+    private final int dias; // Atributo privado
 
-    // Constructor privado (solo Java puede instanciar las constantes del enum)
-    private Mes(int dias) { this.dias = dias; }
-
-    public int getDias() { return dias; }
-    public int getOrdinal() { return this.ordinal() + 1; } // ordinal() devuelve 0-11
-
-    // Lógica simplificada de estaciones
-    public boolean esDeInvierno(boolean norte) {
-        return norte ? (this == DICIEMBRE || this == ENERO || this == FEBRERO)
-                     : (this == JUNIO || this == JULIO || this == AGOSTO);
+    // Constructor privado
+    private Mes(int dias) { 
+        this.dias = dias; 
     }
-    
-    // Podemos reutilizar la lógica invirtiendo el hemisferio para el verano
-    public boolean esDeVerano(boolean norte) { return esDeInvierno(!norte); }
-    
-    // Se implementarían primavera y otoño de forma similar...
-    public boolean esDePrimavera(boolean norte) {
-         return norte ? (this == MARZO || this == ABRIL || this == MAYO)
-                      : (this == SEPTIEMBRE || this == OCTUBRE || this == NOVIEMBRE);
+
+    public int getDias() { 
+        return this.dias; 
     }
-    public boolean esDeOtoño(boolean norte) { return esDePrimavera(!norte); }
+
+    public int getOrdinal() { 
+        return this.ordinal() + 1; // ordinal() empieza en 0
+    }
 }
+```
+
+## 24. Añade a la clase `Mes` del ejercicio anterior cuatro métodos para devolver si ese mes tiene algunos días de invierno, primavera, verano u otoño, indicando con un booleano el hemisferio (norte o sur, parámetro `enHemisferioNorte`). Es decir: `esDePrimavera(boolean esHemisferioNorte)`, `esDeVerano(boolean esHemisferioNorte)`, `esDeOtoño(boolean esHemisferioNorte)`, `esDeInvierno(boolean esHemisferioNorte)`
+
+### Respuesta
+
+```java
+// Estos métodos irían dentro del enum Mes definido arriba
+
+    public boolean esDeInvierno(boolean enHemisferioNorte) {
+        return enHemisferioNorte ? 
+            (this == DICIEMBRE || this == ENERO || this == FEBRERO || this == MARZO) : 
+            (this == JUNIO || this == JULIO || this == AGOSTO || this == SEPTIEMBRE);
+    }
+
+    public boolean esDePrimavera(boolean enHemisferioNorte) {
+        return enHemisferioNorte ? 
+            (this == MARZO || this == ABRIL || this == MAYO || this == JUNIO) : 
+            (this == SEPTIEMBRE || this == OCTUBRE || this == NOVIEMBRE || this == DICIEMBRE);
+    }
+
+    // Truco: El verano es exactamente el invierno del hemisferio contrario
+    public boolean esDeVerano(boolean enHemisferioNorte) {
+        return esDeInvierno(!enHemisferioNorte); 
+    }
+
+    // Truco: El otoño es exactamente la primavera del hemisferio contrario
+    public boolean esDeOtoño(boolean enHemisferioNorte) {
+        return esDePrimavera(!enHemisferioNorte);
+    }
 ```
