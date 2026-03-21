@@ -99,7 +99,19 @@ El punto de entrada es `public static void main(String[] args)`. `static` indica
 
 ### Respuesta
 
-Compilas con `javac Archivo.java` (genera el `.class`) y ejecutas con `java Archivo`. El **byte-code** es el código intermedio universal que genera el compilador. Los ficheros `.class` contienen ese byte-code, que no es código máquina directo, sino instrucciones para la JVM.
+### **1. Compilación y ejecución**
+Para compilar se utiliza `javac archivo.java`, lo que genera el código intermedio. Para ejecutarlo, se usa `java NombreClase`, que invoca a la máquina virtual para procesar dicho archivo.
+
+### **2. ¿Java es compilado?**
+Es un lenguaje **híbrido**. Primero se **compila** a un formato intermedio (bytecode) para asegurar la portabilidad, y luego se **interpreta** (o se compila en tiempo real con JIT) por la máquina virtual en el sistema destino.
+
+
+### **3. Máquina Virtual de Java (JVM)**
+Es un entorno de ejecución que actúa como una capa de abstracción entre el bytecode y el hardware. Su función es traducir el código universal de Java a instrucciones nativas de cada sistema operativo (Windows, Mac, Linux).
+
+
+### **4. Byte-code y ficheros .class**
+El **Byte-code** es el código de bajo nivel, independiente de la plataforma, generado por el compilador. Se almacena en ficheros **.class** y contiene las instrucciones que la JVM es capaz de entender y ejecutar.
 
 
 ## 11. En el código anterior de la clase `Punto` ¿Qué es `new`? ¿Qué es un **constructor**? Pon un ejemplo de constructor en una clase `Empleado` que tenga DNI, nombre y apellidos
@@ -137,6 +149,11 @@ class Punto {
 	//Métodos
 	double calcularDistanciaAOrigen() {
 		return Math.sqrt(x*x + y*y);
+	}
+
+	public static void main (String[] args){
+		Punto miPunto = new Punto(3,4);
+		System.out.println(miPunto.calcularDistanciaAOrigen());
 	}
 
 }
